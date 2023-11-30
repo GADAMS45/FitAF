@@ -1,0 +1,24 @@
+{{!< layouts/main}} <!-- Extend the main layout template -->
+
+<div class="dashboard">
+  <div class="daily-info">
+    <button class="prev-day">Previous Day</button>
+    <div class="day-exercises">
+      <h2>Today's Exercises</h2>
+      <ul>
+        {{#each exercises}}
+          <li>{{this.name}} - {{this.duration}}</li> <!-- Display a list of exercises -->
+        {{/each}}
+      </ul>
+    </div>
+    <button class="next-day">Next Day</button>
+  </div>
+  <div class="nutrition-info">
+    <h2>Nutritional Goals</h2>
+    <p>Calories: {{nutrition.calories}}</p>
+    <p>Protein: {{nutrition.protein}}g</p>
+    <p>Carbs: {{nutrition.carbs}}g</p>
+    <p>Fats: {{nutrition.fats}}g</p>
+  </div>
+  <button class="change-plan">Change Plan</button>
+</div>
