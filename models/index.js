@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 
 // Import models
 const User = require('./User'); // Import the User model
-const Exercise = require('./Exercise'); // Import the Exercise model
+const Exercise = require('./exercise'); // Import the Exercise model
 const Nutrition = require('./Nutrition'); // Import the Nutrition model
 
 // Initialize models
