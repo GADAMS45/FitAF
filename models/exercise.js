@@ -3,50 +3,45 @@ const sequelize = require('../config/connection');
 
 class Exercise extends Model {}
 
-Exercise.init(
-    {
-        id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            autoIncrement: true,
-        },
-        user_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id',
-            },
-        },
-        goal_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            references: {
-                model: 'fitness_goals',
-                key: 'goal_id',
-            },
-        },
-        exercise_name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        intensity_level: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        date: {
-            type: DataTypes.DATE,
-            allowNull: false,
-        },
-    },
-    {
-        sequelize,
-        timestamps: false,
-        freezeTableName: true,
-        underscored: true,
-        modelName: 'exercise',
+router.get('/exercises/:exerciseType', async (req, res) => {
+    try {
+      const exerciseType = req.params.exerciseType;
+      const exerciseData = await Exercise.findAll({
+        where: { exerciseType: exerciseType }
+      });
+  
+      res.json(exerciseData);
+    } catch (error) {
+      res.status(500).send('Server Error');
     }
+  });
+  
+Exercise.init(
+  {
+    // Define attributes such as id, name, duration, type, etc.
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
+    },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    duration: {
+      type: DataTypes.INTEGER, // Duration in minutes, for example
+      allowNull: false
+    },
+    // Other attributes like type, intensity
+  },
+  {
+    sequelize,
+    timestamps: false,
+    freezeTableName: true,
+    underscored: true,
+    modelName: 'exercise',
+  }
 );
 
 module.exports = Exercise;

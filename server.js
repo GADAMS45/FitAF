@@ -4,6 +4,8 @@ const session = require('express-session');
 const passport = require('./utils/auth'); // Passport authentication setup
 const routes = require('./controllers'); // Import your routes
 const helpers = require('./utils/helpers'); // Helper functions
+const nutritionRoutes = require('./api/nutritionRoutes');
+const exerciseRoutes = require('./api/exerciseRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000; // Define the server port
@@ -32,6 +34,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(routes); // Use routes from the controllers
+app.use('/api', nutritionRoutes);
+app.use('/api', exerciseRoutes);
 
 // Error handling middleware should be the last piece of middleware added to the app
 app.use((err, req, res, next) => {
