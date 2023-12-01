@@ -30,7 +30,15 @@ Nutrition.belongsTo(User, {
   foreignKey: 'userId', // Define a foreign key relationship in Nutrition model
 });
 
-// You can add other relationships between models here
+Exercise.belongsToMany(Nutrition, {
+  through: 'ExerciseNutrition',
+  foreignKey: 'exercise_id',
+});
+
+Nutrition.belongsToMany(Exercise, {
+  through: 'ExerciseNutrition',
+  foreignKey: 'nutrition_id',
+});
 
 // Export models and the Sequelize instance
 module.exports = {

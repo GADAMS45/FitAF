@@ -1,17 +1,13 @@
 DROP DATABASE IF EXISTS user_db;
 CREATE DATABASE user_db;
-DROP DATABASE IF EXISTS user_db;
-CREATE DATABASE user_db;
-DROP DATABASE IF EXISTS user_db;
-CREATE DATABASE user_db;
 
 USE user_db;
 
 CREATE TABLE user_table (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(30) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    name VARCHAR(30) NOT NULL,
+    email VARCHAR(100) NOT NULL CHECK (email LIKE '%_@__%.__%'),
+    password VARCHAR(100) NOT NULL CHECK (LEN(password) >= 8)
 );
 
 CREATE TABLE fitness_goals (
