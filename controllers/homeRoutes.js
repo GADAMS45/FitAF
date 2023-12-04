@@ -40,5 +40,6 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   }
 });
 
+
 // Export the configured router to be used in your Express application
 module.exports = router;
