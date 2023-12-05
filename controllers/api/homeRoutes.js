@@ -10,6 +10,7 @@ const { ensureAuthenticated } = require('../../utils/auth');
 // Define a route for the user dashboard
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   try {
+
     // Query the Exercise model to retrieve exercise data for the logged-in user
     const exercises = await Exercise.findAll({
       // Add your query here, for example: where: { userId: req.user.id }
@@ -37,6 +38,7 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
     res.status(500).render('error', { error: err }); // Render an error view with the error message
   }
 });
+
 
 // Export the configured router to be used in your Express application
 module.exports = router;
