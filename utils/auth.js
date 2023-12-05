@@ -38,4 +38,16 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = passport; // Export the configured Passport instance
+// Middleware to ensure user is authenticated
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  // Redirect to login page or return an error
+  res.redirect('/login'); // or res.status(401).send('User not authenticated');
+};
+
+module.exports = {
+passport,
+ensureAuthenticated
+}; // Export the configured Passport instance and exporting middleware

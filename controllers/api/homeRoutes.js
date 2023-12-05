@@ -2,16 +2,14 @@
 const router = require('express').Router();
 
 // Import necessary modules and models
-const { Exercise, Nutrition } = require('../models'); // Sequelize models for Exercise and Nutrition
+const { Exercise, Nutrition } = require('../../models'); // Sequelize models for Exercise and Nutrition
 
 // Import middleware to protect this route and ensure the user is logged in
-const { ensureAuthenticated } = require('../utils/auth');
+const { ensureAuthenticated } = require('../../utils/auth');
 
 // Define a route for the user dashboard
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
   try {
-    // Replace the comments with the appropriate queries to get the data for the logged-in user
-    
     // Query the Exercise model to retrieve exercise data for the logged-in user
     const exercises = await Exercise.findAll({
       // Add your query here, for example: where: { userId: req.user.id }
