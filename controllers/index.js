@@ -3,8 +3,8 @@ const router = require('express').Router();
 
 // Import other route handlers
 const apiRoutes = require('./api'); // API-related routes
-const homeRoutes = require('./homeRoutes'); // Home/dashboard-related routes
-const userRoutes = require('./userRoutes'); // User-related routes
+const homeRoutes = require('./api/homeRoutes'); // Home/dashboard-related routes
+const userRoutes = require('./api/userRoutes');
 
 // Define the route structure for your application
 router.use('/', homeRoutes); // Routes for the home/dashboard (root) URL
