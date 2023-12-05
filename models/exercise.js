@@ -1,5 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const router = require('express').Router();
 
 class Exercise extends Model {}
 
