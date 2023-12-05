@@ -2,10 +2,10 @@
 const router = require('express').Router();
 
 // Import necessary modules and models
-const { Exercise, Nutrition } = require('../models'); // Sequelize models for Exercise and Nutrition
+const { Exercise, Nutrition } = require('../../models'); // Sequelize models for Exercise and Nutrition
 
 // Import middleware to protect this route and ensure the user is logged in
-const { ensureAuthenticated } = require('../utils/auth');
+const { ensureAuthenticated } = require('../../utils/auth');
 
 // Define a route for the user dashboard
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
