@@ -44,6 +44,13 @@ app.get("/login", (req, res) => {
     })
 })
 
+app.get("/dashboard", (req, res) => {
+    res.render("dashboard", {
+        pageTitle: "Dashboard"
+    })
+})
+
+
 ////////////////////////////
 
 
