@@ -10,7 +10,7 @@ const { Exercise, Nutrition } = require('../../models');
 //Dashboard route to display exercise and diet
 router.get('/dashboard', async (req, res) => {
   if (!req.user) {
-    res.redirect('/login'); // Redirect to login if not authenticated
+    res.redirect('users/login'); // Redirect to login if not authenticated
     return;
   }
 
@@ -59,7 +59,7 @@ router.post('/logout', (req, res) => {
   // Passport's logout method is called to log the user out
   req.logout(() => {
     // Redirect to the login page after logging out
-    res.redirect('/login');
+    res.redirect('/users/login');
   });
 });
 
