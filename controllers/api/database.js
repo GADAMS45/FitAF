@@ -1,5 +1,5 @@
 require('dotenv').config();
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 // Database connection setup using environment variables
 const db = mysql.createConnection({
@@ -7,14 +7,6 @@ const db = mysql.createConnection({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME
-});
-
-db.connect(err => {
-    if (err) {
-        console.error('Error connecting to the database:', err);
-        return;
-    }
-    console.log('Connected to MySQL database');
 });
 
 // Function to store exercise plan
@@ -39,4 +31,14 @@ const storeMealPlan = (userId, mealPlan) => {
     });
 };
 
-module.exports = { storeExercisePlan, storeMealPlan };
+function connectDatabase() {
+    db.connect(err => {
+        if (err) {
+            console.error('Error connecting to the database:', err);
+            process.exit(1);
+        }
+        console.log('Connected to MySQL database');
+    });
+}
+
+module.exports = { storeExercisePlan, storeMealPlan, connectDatabase };
