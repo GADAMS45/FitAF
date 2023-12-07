@@ -44,6 +44,41 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong!');
 });
 
+
+
+app.get("/", (req, res) => {
+  res.render("homepage", {
+      pageTitle: "Welcome to Fit AF!"
+  })
+})
+
+
+app.get("/cart", (req, res) => {
+  res.render("cartpage", {
+      pageTitle: "Shopping Cart"
+  })
+})
+
+app.get("/recipesearch", (req, res) => {
+  res.render("recipesearchpage", {
+      pageTitle: "Recipes"
+  })
+})
+
+app.get("/login", (req, res) => {
+  res.render("login", {
+      layout: "forlogin",
+      pageTitle: "Login"
+  })
+})
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard", {
+      pageTitle: "Dashboard"
+  })
+})
+
+
 // Sync Sequelize models and then start the server
 sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
