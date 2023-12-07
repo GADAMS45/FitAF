@@ -1,6 +1,6 @@
 const express = require('express');
-const { Nutrition } = require('../../models');
-const { storeDietPlan } = require('./database');
+const { Nutrition } = require('../models');
+const { storeDietPlan } = require('../db/database');
 const router = express.Router();
 
 router.get('/nutrition/:dietType', async (req, res) => {

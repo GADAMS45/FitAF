@@ -10,6 +10,7 @@ CREATE TABLE user_table (
     password VARCHAR(100) NOT NULL
 );
 
+
 CREATE TABLE exercise_plans (
     plan_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,

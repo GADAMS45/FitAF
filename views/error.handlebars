@@ -1,0 +1,12 @@
+<h1>An Error Occurred</h1>
+<p>Sorry, there was a problem processing your request.</p>
+
+{{#if error}}
+  <div class="error-message">
+    <p>Error details: {{error}}</p>
+  </div>
+{{else}}
+  <p>No error details available.</p>
+{{/if}}
+
+<a href="/">Go back to the homepage</a>

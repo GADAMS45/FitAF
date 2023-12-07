@@ -40,6 +40,8 @@ passport.deserializeUser(async (id, done) => {
 
 // Middleware to ensure user is authenticated
 const ensureAuthenticated = (req, res, next) => {
+  console.log('ensureAuthenticated triggered', req.isAuthenticated());
+  
   if (req.isAuthenticated()) {
     return next();
   }

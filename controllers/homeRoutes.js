@@ -1,10 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const { Exercise, Nutrition } = require('../../models');
-const { ensureAuthenticated } = require('../../utils/auth');
+const { Exercise, Nutrition } = require('../models');
+const { ensureAuthenticated } = require('../utils/auth');
+
+router.get('/', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.redirect('/dashboard');
+    } else {
+        res.redirect('/login');
+    }
+});
 
 router.get('/dashboard', ensureAuthenticated, async (req, res) => {
     try {
+        console.log('Registering user:', req.body);
+
         const exercises = await Exercise.findAll({
             where: { userId: req.user.id }
         });
@@ -21,9 +31,19 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
             nutrition: nutritionData
         });
     } catch (err) {
+        console.log('Registering user:', req.body);
+
         console.error('Error fetching dashboard data:', err);
         res.status(500).render('error', { error: err });
     }
+});
+
+router.get('/login', (req, res) => {
+    res.render('login');
+});
+
+router.get('/register', (req, res) => {
+    res.render('register');
 });
 
 module.exports = router;

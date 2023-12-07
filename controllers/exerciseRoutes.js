@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const { storeExercisePlan } = require('./database');
-const Exercise = require('../../models/exercise');
+const { storeExercisePlan } = require('../db/database');
+const Exercise = require('../models/exercise');
 
 
 router.get('/exercises/:exerciseType', async (req, res) => {

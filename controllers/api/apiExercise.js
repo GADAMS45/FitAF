@@ -1,5 +1,5 @@
 const https = require('https');
-const db = require('./api/database');
+const db = require('../../db/database');
 
 const fetchExerciseData = async (exerciseType) => {
     try {
@@ -52,3 +52,5 @@ const selectWeeklyExercises = (exercises) => {
 
     return weeklySchedule;
 };
+
+module.exports = { fetchExerciseData, selectWeeklyExercises };
