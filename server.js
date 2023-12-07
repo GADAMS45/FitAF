@@ -7,6 +7,7 @@ const helpers = require('./utils/helpers');
 const nutritionRoutes = require('./controllers/api/nutritionRoutes');
 const exerciseRoutes = require('./controllers/api/exerciseRoutes');
 const sequelize = require('./config/connection');
+const db = require('./controllers/api/database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,6 +16,8 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public')); 
+
+db.connectDatabase();
 
 // Handlebars setup
 const exphbs = require('express-handlebars');
@@ -45,8 +48,13 @@ app.use((err, req, res, next) => {
 });
 
 // Sync Sequelize models and then start the server
-sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+sequelize.sync({ force: false }).then(async () => {
+  try {
+    await db.connectDatabase(); // Ensure the database is connected
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 });

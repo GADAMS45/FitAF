@@ -6,45 +6,22 @@ USE user_db;
 CREATE TABLE user_table (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
-    email VARCHAR(100) NOT NULL CHECK (email LIKE '%_@__%.__%'),
-    password VARCHAR(100) NOT NULL CHECK (LEN(password) >= 8)
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
 );
 
-CREATE TABLE fitness_goals (
-    goal_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE exercise_plans (
+    plan_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    FOREIGN KEY (user_id)
-    REFERENCES user_table(id),
-    fitness_goal VARCHAR(100) NOT NULL,
-    target_weight DECIMAL(5,2),
-    target_duration INT
+    exercise_details TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user_table(id)
 );
 
-CREATE TABLE user_workouts (
-    workout_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE diet_plans (
+    plan_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT,
-    FOREIGN KEY (user_id)
-    REFERENCES user_table(id),
-    goal_id INT,
-    FOREIGN KEY (goal_id)
-    REFERENCES fitness_goals(goal_id),
-    workout_name VARCHAR(100) NOT NULL,
-    exercise_list TEXT,
-    duration INT,
-    intensity_level VARCHAR(50),
-    date DATE
-);
-
-CREATE TABLE user_recipes (
-    recipe_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT,
-    FOREIGN KEY (user_id)
-    REFERENCES user_table(id),
-    goal_id INT,
-    FOREIGN KEY (goal_id)
-    REFERENCES fitness_goals(goal_id),
-    recipe_name VARCHAR(100) NOT NULL,
-    ingredients TEXT,
-    nutrition_info TEXT,
-    cooking_instructions TEXT
+    diet_details TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user_table(id)
 );

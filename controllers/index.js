@@ -1,15 +1,14 @@
-// Import the Express Router
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 
-// Import other route handlers
-const apiRoutes = require('./api'); // API-related routes
-const homeRoutes = require('./api/homeRoutes'); // Home/dashboard-related routes
-const userRoutes = require('./api/userRoutes');
+// Import route modules
+const homeRoutes = require('./homeRoutes');
+const userRoutes = require('./userRoutes');
+const apiRoutes = require('./api');
 
-// Define the route structure for your application
-router.use('/', homeRoutes); // Routes for the home/dashboard (root) URL
-router.use('/users', userRoutes); // Routes related to user management (e.g., registration, login, logout)
-router.use('/api', apiRoutes); // API routes for handling data requests
+// Define root-level routes
+router.use('/', homeRoutes);
+router.use('/users', userRoutes);
+router.use('/api', apiRoutes);
 
-// Export the configured router to be used in your Express application
 module.exports = router;

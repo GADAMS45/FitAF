@@ -1,9 +1,10 @@
 const https = require('https');
+const db = require('./api/database');
 
 const fetchRecipeData = async (searchQuery) => {
     try {
         const apiKey = '1f953591139340d98ce2a3a64ef6818b';
-        const apiUrl = `https://api.spoonacular.com/recipes/search?apiKey=${apiKey}&query=${searchQuery}&number=5`;
+        const apiUrl = `https://api.spoonacular.com/mealplanner/generate?apiKey=${apiKey}&diet=${searchQuery}&timeFrame=week`;
 
         const response = await new Promise((resolve, reject) => {
             const req = https.get(apiUrl, (res) => {
@@ -14,7 +15,7 @@ const fetchRecipeData = async (searchQuery) => {
                 });
 
                 res.on('end', () => {
-                    resolve(data);
+                    resolve(JSON.parse(data));
                 });
             });
 
@@ -25,9 +26,7 @@ const fetchRecipeData = async (searchQuery) => {
             req.end();
         });
 
-        const data = JSON.parse(response);
-
-        return data.results;
+        return response.week;
     } catch (error) {
         console.error('Error fetching recipe data:', error);
         throw new Error('Failed to fetch recipe data!');
