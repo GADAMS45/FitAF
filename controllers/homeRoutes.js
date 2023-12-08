@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Exercise, Nutrition } = require('../models');
 const { ensureAuthenticated } = require('../utils/auth');
+const { fetchExerciseData, selectWeeklyExercises } = require('./api/apiExercise');
+const { fetchRecipeData } = require('./api/apiNutrition');
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
@@ -15,20 +16,18 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
     try {
         console.log('Registering user:', req.body);
 
-        const exercises = await Exercise.findAll({
-            where: { userId: req.user.id }
-        });
+        // Get User from Id
+        let user = req.user;
 
-        const nutrition = await Nutrition.findOne({
-            where: { userId: req.user.id }
-        });
+        const exerciseData = await fetchExerciseData(user.exercisePlan);
+        const weeklyExerciseSchedule = selectWeeklyExercises(exerciseData);
+        let items = Object.values(weeklyExerciseSchedule).map(i => i[0])
 
-        const exerciseData = exercises.map(exercise => exercise.get({ plain: true }));
-        const nutritionData = nutrition ? nutrition.get({ plain: true }) : null;
+        const dietData = await fetchRecipeData(user.dietPlan);
 
         res.render('dashboard', {
-            exercises: exerciseData,
-            nutrition: nutritionData
+            exercises: items,
+            nutrition: Object.values(dietData)
         });
     } catch (err) {
         console.log('Registering user:', req.body);

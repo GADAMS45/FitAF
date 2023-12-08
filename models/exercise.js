@@ -16,10 +16,6 @@ Exercise.init(
       type: DataTypes.STRING,
       allowNull: true
     },
-    duration: {
-      type: DataTypes.INTEGER,
-      allowNull: true
-    },
   },
   {
     sequelize,

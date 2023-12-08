@@ -37,7 +37,7 @@ const fetchExerciseData = async (exerciseType) => {
 
 const selectWeeklyExercises = (exercises) => {
     const daysInWeek = 7;
-    const exercisesPerDay = 5;
+    const exercisesPerDay = 1;
     let weeklySchedule = {};
 
     for (let i = 1; i <= daysInWeek; i++) {

@@ -6,7 +6,8 @@
     <div class="exercise-info">
     <h2>This week's Exercises</h2>
     {{#each exercises}}
-    <p>{{this.day}}: {{this.exercise_details}}</p>
+    <p>{{name}}</p>
+    <p>{{instructions}}</p>
     {{/each}}
 </div>
     <button class="change-exercise=plan">Change Exercise Plan</button>
@@ -14,8 +15,11 @@
   <div class="diet-info">
     <div class="diet-info">
     <h2>This week's Meals</h2>
-    {{#each nutrition.meals}}
-    <p>{{this.day}}: {{this.meal_details}}</p>
+    {{#each nutrition}}
+      {{#each meals}}
+        <p>{{this.title}}</p>
+        <a href={{this.sourceUrl}}> Click here to see the meal! <a/>
+      {{/each}}
     {{/each}}
 </div>
   <button class="change-diet-plan">Change Diet Plan</button>

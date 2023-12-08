@@ -35,6 +35,14 @@ User.init(
       len: [8],
     },
   },
+  dietPlan:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  exercisePlan:{
+    type: DataTypes.STRING,
+    allowNull: false,
+  }
 },
 {
   hooks: {
