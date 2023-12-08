@@ -7,7 +7,9 @@ const { User } = require('../models'); // Import the User model
 passport.use(new LocalStrategy(
   async (email, password, done) => {
     try {
-      const user = await User.findOne({ where: { email } }); // Find a user with the provided email
+      const user = await User.findOne({ 
+        where: { email: email.toLowerCase() } // Converts the email to lowercase
+      }); // Find a user with the provided email
       if (!user) {
         return done(null, false, { message: 'Incorrect email.' }); // If no user is found, return an error message
       }
@@ -36,4 +38,16 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-module.exports = passport; // Export the configured Passport instance
+// Middleware to ensure user is authenticated
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  // Redirect to login page or return an error
+  res.redirect('/login'); // or res.status(401).send('User not authenticated');
+};
+
+module.exports = {
+passport,
+ensureAuthenticated
+}; // Export the configured Passport instance and exporting middleware

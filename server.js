@@ -1,44 +1,95 @@
-require('dotenv').config(); // Load environment variables from a .env file
+require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
-const passport = require('./utils/auth'); // Passport authentication setup
-const routes = require('./controllers'); // Import your routes
-const helpers = require('./utils/helpers'); // Helper functions
+const { passport } = require('./utils/auth');
+const routes = require('./controllers');
+const helpers = require('./utils/helpers');
+const nutritionRoutes = require('./controllers/api/nutritionRoutes');
+const exerciseRoutes = require('./controllers/api/exerciseRoutes');
+const sequelize = require('./config/connection');
+const db = require('./controllers/api/database');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Define the server port
+const PORT = process.env.PORT || 3000;
 
+// Middleware and other setup
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public')); // Serve static files from the "public" directory
+app.use(express.static('public')); 
 
-// Set up Handlebars.js as your view engine
+db.connectDatabase();
+
+// Handlebars setup
 const exphbs = require('express-handlebars');
-const hbs = exphbs.create({
-  helpers, // Add custom Handlebars helpers here
-});
+const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
-// Set up session middleware
+// Session setup
 app.use(session({
-  secret: process.env.SESSION_SECRET, // Secret for session management
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }));
 
-// Initialize Passport and restore authentication state from session
+// Passport initialization
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(routes); // Use routes from the controllers
+// Routes setup
+app.use(routes);
+app.use('/api', nutritionRoutes);
+app.use('/api', exerciseRoutes);
 
-// Error handling middleware should be the last piece of middleware added to the app
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something went wrong!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
+
+
+app.get("/", (req, res) => {
+  res.render("homepage", {
+      pageTitle: "Welcome to Fit AF!"
+  })
+})
+
+
+app.get("/cart", (req, res) => {
+  res.render("cartpage", {
+      pageTitle: "Shopping Cart"
+  })
+})
+
+app.get("/recipesearch", (req, res) => {
+  res.render("recipesearchpage", {
+      pageTitle: "Recipes"
+  })
+})
+
+app.get("/login", (req, res) => {
+  res.render("login", {
+      layout: "forlogin",
+      pageTitle: "Login"
+  })
+})
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard", {
+      pageTitle: "Dashboard"
+  })
+})
+
+
+// Sync Sequelize models and then start the server
+sequelize.sync({ force: false }).then(async () => {
+  try {
+    await db.connectDatabase(); // Ensure the database is connected
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`);
+    });
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+  }
 });

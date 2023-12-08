@@ -1,0 +1,14 @@
+.header, .navbar {
+    display: flex;
+    
+    align-items: flex-end;
+}
+
+.header {
+    justify-content: space-between;
+}
+
+.link {
+    margin: 10px;
+    color: white;
+}
