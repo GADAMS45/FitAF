@@ -1,14 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-// Import route modules
-const homeRoutes = require('./api/homeRoutes');
-const userRoutes = require('./api/userRoutes');
-const apiRoutes = require('./api');
+const homeRoutes = require('./homeRoutes');
+const userRoutes = require('./userRoutes');
+const exerciseRoutes = require('./exerciseRoutes');
+const nutritionRoutes = require('./nutritionRoutes');
 
-// Define root-level routes
 router.use('/', homeRoutes);
-router.use('/users', userRoutes);
-router.use('/api', apiRoutes);
+router.use('/', userRoutes);
+router.use('/exercises', exerciseRoutes);
+router.use('/nutrition', nutritionRoutes);
 
 module.exports = router;

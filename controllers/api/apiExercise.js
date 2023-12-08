@@ -1,5 +1,5 @@
 const https = require('https');
-const db = require('./api/database');
+const db = require('../../db/database');
 
 const fetchExerciseData = async (exerciseType) => {
     try {
@@ -37,7 +37,7 @@ const fetchExerciseData = async (exerciseType) => {
 
 const selectWeeklyExercises = (exercises) => {
     const daysInWeek = 7;
-    const exercisesPerDay = 5;
+    const exercisesPerDay = 1;
     let weeklySchedule = {};
 
     for (let i = 1; i <= daysInWeek; i++) {
@@ -52,3 +52,5 @@ const selectWeeklyExercises = (exercises) => {
 
     return weeklySchedule;
 };
+
+module.exports = { fetchExerciseData, selectWeeklyExercises };

@@ -1,5 +1,5 @@
 const https = require('https');
-const db = require('./api/database');
+const db = require('../../db/database');
 
 const fetchRecipeData = async (searchQuery) => {
     try {
