@@ -1,13 +1,7 @@
 [
-    {
-      "username": "sampleuser1",
-      "email": "sampleuser1@example.com",
-      "password": "password123"
-    },
-    {
-      "username": "sampleuser2",
-      "email": "sampleuser2@example.com",
-      "password": "password123"
-    }
-  ]
-  
+  {
+    "name": "John Doe",
+    "email": "johndoe2@yahoo.com",
+    "password": "Testing123"
+  }
+]

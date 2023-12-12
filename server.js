@@ -4,10 +4,10 @@ const session = require('express-session');
 const { passport } = require('./utils/auth');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
-const nutritionRoutes = require('./controllers/api/nutritionRoutes');
-const exerciseRoutes = require('./controllers/api/exerciseRoutes');
+const nutritionRoutes = require('./controllers/nutritionRoutes');
+const exerciseRoutes = require('./controllers/exerciseRoutes');
 const sequelize = require('./config/connection');
-const db = require('./controllers/api/database');
+const db = require('./db/database');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,13 +17,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public')); 
 
-db.connectDatabase();
-
 // Handlebars setup
 const exphbs = require('express-handlebars');
 const hbs = exphbs.create({ helpers });
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+console.log('Views Directory:', app.get('views'));
 
 // Session setup
 app.use(session({
@@ -85,7 +85,7 @@ app.get("/dashboard", (req, res) => {
 // Sync Sequelize models and then start the server
 sequelize.sync({ force: false }).then(async () => {
   try {
-    await db.connectDatabase(); // Ensure the database is connected
+    
     app.listen(PORT, () => {
       console.log(`Server running on http://localhost:${PORT}`);
     });

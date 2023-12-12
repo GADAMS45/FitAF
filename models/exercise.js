@@ -6,22 +6,16 @@ class Exercise extends Model {}
   
 Exercise.init(
   {
-    // Define attributes such as id, name, duration, type, etc.
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       primaryKey: true,
       autoIncrement: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     },
-    duration: {
-      type: DataTypes.INTEGER, // Duration in minutes, for example
-      allowNull: false
-    },
-    // Other attributes like type, intensity
   },
   {
     sequelize,

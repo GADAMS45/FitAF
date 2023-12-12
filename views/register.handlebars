@@ -1,0 +1,46 @@
+<h1>Register</h1>
+<form action="/register" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required>
+    <br>
+
+    <label for="dietPlan">Select Diet Plan:</label>
+    <select id="dietPlan" name="dietPlan">
+        <option value="gluten_free">Gluten Free</option>
+        <option value="ketogenic">Ketogenic</option>
+        <option value="vegetarian">Vegetarian</option>
+        <option value="lacto_vegetarian">Lacto-Vegetarian</option>
+        <option value="ovo_vegetarian">Ovo-Vegetarian</option>
+        <option value="vegan">Vegan</option>
+        <option value="pescetarian">Pescetarian</option>
+        <option value="paleo">Paleo</option>
+        <option value="primal">Primal</option>
+        <option value="low_fodmap">Low FODMAP</option>
+        <option value="whole30">Whole30</option>
+    </select>
+    <br>
+
+    <label for="exercisePlan">Select Exercise Plan:</label>
+    <select id="exercisePlan" name="exercisePlan">
+        <option value="cardio">Cardio</option>
+        <option value="olympic_weightlifting">Olympic Weightlifting</option>
+        <option value="plyometrics">Plyometrics</option>
+        <option value="powerlifting">Powerlifting</option>
+        <option value="strength">Strength</option>
+        <option value="stretching">Stretching</option>
+        <option value="strongman">Strongman</option>
+    </select>
+    <br>
+
+    <button type="submit">Register</button>
+</form>
+
+<p>Already have an account? <a href="/login">Login</a></p>

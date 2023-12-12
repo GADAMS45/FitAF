@@ -7,8 +7,11 @@ CREATE TABLE user_table (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(30) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    dietPlan VARCHAR(64) NOT NULL,
+    exercisePlan VARCHAR(64) NOT NULL
 );
+
 
 CREATE TABLE exercise_plans (
     plan_id INT AUTO_INCREMENT PRIMARY KEY,
