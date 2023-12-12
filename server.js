@@ -8,6 +8,7 @@ const nutritionRoutes = require('./controllers/nutritionRoutes');
 const exerciseRoutes = require('./controllers/exerciseRoutes');
 const sequelize = require('./config/connection');
 const db = require('./db/database');
+const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 // Middleware and other setup
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public')); 
+app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // Handlebars setup
 const exphbs = require('express-handlebars');
