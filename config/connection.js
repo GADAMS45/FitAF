@@ -1,15 +1,14 @@
 const Sequelize = require('sequelize');
-
 require('dotenv').config();
 
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USER,
-  process.env.DB_PASSWORD,
+  process.env.JAWSDB_NAME,
+  process.env.JAWSDB_USER,
+  process.env.JAWSDB_PASSWORD,
   {
-    host: process.env.DB_HOST, 
+    host: process.env.JAWSDB_HOST,
     dialect: 'mysql',
-    port: process.env.DB_PORT || 3306, 
+    port: process.env.JAWSDB_PORT || 3306,
   }
 );
 
